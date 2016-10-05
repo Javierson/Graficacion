@@ -1,4 +1,5 @@
-package Pruebas2;
+
+package Pruebas3;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

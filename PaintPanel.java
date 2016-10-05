@@ -1,4 +1,4 @@
-package Pruebas2;
+package Pruebas3;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,7 +16,7 @@ public class PaintPanel extends JPanel {
 	
 	private Listener theListener;
 	private int x, y;
-	private OptionsWindow optionsWindow;
+	private Opciones optionsWindow;
 	
 	private Graphics2D g2;
 	private BufferedImage image;
@@ -29,14 +29,14 @@ public class PaintPanel extends JPanel {
 	
 	public static final int SCALE = 8;
 	
-	public PaintPanel(OptionsWindow optionsWindow) {
-		this.optionsWindow = new OptionsWindow();
+	public PaintPanel(Opciones optionsWindow) {
+		this.optionsWindow = new Opciones();
 		theListener = new Listener();
 		this.addMouseListener(theListener);
 		this.addMouseMotionListener(theListener);
 		//repaint();
-		image = new BufferedImage( PaintWindow.WIDTH / SCALE,
-				PaintWindow.HEIGHT / SCALE, BufferedImage.TYPE_INT_RGB );
+		image = new BufferedImage( PaintFrame.WIDTH / SCALE,
+				PaintFrame.HEIGHT / SCALE, BufferedImage.TYPE_INT_RGB );
 		g2 = (Graphics2D) image.getGraphics();
 		strokes = new ArrayList<Tool>();
 		draw();
@@ -46,7 +46,7 @@ public class PaintPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		
 		g.drawImage(image, 0, 0,
-				PaintWindow.WIDTH, PaintWindow.HEIGHT, null);
+				PaintFrame.WIDTH, PaintFrame.HEIGHT, null);
 		
 		/*
 		g.setColor(Color.WHITE);
@@ -70,7 +70,7 @@ public class PaintPanel extends JPanel {
 	
 	public void drawBackground() {
 		g2.setColor(Color.WHITE);
-		g2.fillRect(0, 0, PaintWindow.WIDTH, PaintWindow.HEIGHT);
+		g2.fillRect(0, 0, PaintFrame.WIDTH, PaintFrame.HEIGHT);
 	}
 	
 	public void drawStrokes() {
