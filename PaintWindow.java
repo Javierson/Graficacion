@@ -22,7 +22,10 @@ public class PaintWindow {
 		
 		theWindow.setLocationRelativeTo(null);
 		//OptionsWindow = new OptionsPanel();
-		theOptionsWindow = new OptionsWindow();
+		
+		// La linea de abajo fue el error
+		//theOptionsWindow = new OptionsWindow();
+		
 		thePaintPanel = new PaintPanel( theOptionsWindow );
 		
 		theWindow.setResizable(false);

@@ -15,8 +15,9 @@ import javax.swing.JPanel;
 public class PaintPanel extends JPanel {
 	
 	private Listener theListener;
-	//private int x, y;
+	private int x, y;
 	private OptionsWindow optionsWindow;
+	
 	private Graphics2D g2;
 	private BufferedImage image;
 	

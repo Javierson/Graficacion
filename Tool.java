@@ -10,8 +10,8 @@ public abstract class Tool {
 	protected Color color;
 	
 	public Tool(int x, int y, int width, int height, Color color) {
-		this.x = x;
-		this.y = y;
+		this.x = x - width / 2;
+		this.y = y - width / 2;
 		this.width = width;
 		this.height = height;
 		// Agrega el cursor de pintado al panel de bibujo
