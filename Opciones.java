@@ -5,8 +5,9 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.WritableRaster;
+
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class Opciones {
+public class Opciones{
 	
 	// Campos
 	
@@ -27,6 +28,10 @@ public class Opciones {
 	// Panel
 	
 	private JPanel Panel;
+	
+	// Declarando privado el raster como comprobacion
+	
+	// private WritableRaster raster  =  image.getRaster();
 	
 	// Deslizadores
 	
@@ -43,6 +48,10 @@ public class Opciones {
 	// Escuchador
 	
 	private OptionsListener Escuchador;
+	
+	// Agregado como comprobacion
+	
+	public WritableRaster raster;
 	
 	public static final int WIDTH = 220;
 	
@@ -66,7 +75,7 @@ public class Opciones {
 		BresenhamToolBTN = new JButton( "Circulo" );
 		// Atributos del dda recopilado del prog0111
 		//JLabel LabelX1 = new JLabel( "X1" );
-		DDAX1 = new JTextField( 2 );
+		DDAX1 = new JTextField ( 2 );
 		DDAY1 = new JTextField( 2 );
 		DDAX2 = new JTextField( 2 );
 		DDAY2 = new JTextField( 2 );
@@ -100,10 +109,10 @@ public class Opciones {
 		
 		DDAToolBTN.addActionListener( Escuchador );
 		BresenhamToolBTN.addActionListener( Escuchador );
-		DDAX1.addActionListener(Escuchador);
-		DDAY1.addActionListener(Escuchador);
-		DDAX2.addActionListener(Escuchador);
-		DDAY2.addActionListener(Escuchador);
+		//DDAX1.addActionListener(Escuchador);
+		//DDAY1.addActionListener(Escuchador);
+		//DDAX2.addActionListener(Escuchador);
+		//DDAY2.addActionListener(Escuchador);
 			
 	}
 	
@@ -112,58 +121,63 @@ public class Opciones {
 		Panel.add( redSlider );
 		Panel.add( greenSlider );
 		Panel.add( blueSlider );
-
 		
 		// Creando y agregando un label
 		// por cada coordenada
 		
-		JLabel LabelX1 = new JLabel( "X1" );
-		//thePanel.add(LabelX1);
-		//thePanel.add( DDAX1 );
-		
-		JLabel LabelY1 = new JLabel( "Y1" );
-		Panel.add(LabelY1);
-		Panel.add( DDAY1 );
-		
-		
-		JLabel LabelX2 = new JLabel( "X2" );
-		Panel.add(LabelX2);
-		Panel.add( DDAX2 );
-		
-		
-		JLabel LabelY2 = new JLabel( "Y2" );
-		Panel.add(LabelY2);
-		Panel.add( DDAY2 );
+
 		
 		// Agregando los botones
 		// al panel de dibujo
 		
-		Panel.add( DDAToolBTN );
 		
 		
-		/* Creacion de un segundo panel para el dda
+		// Creacion de un segundo panel para el dda
 		
 		JPanel PanelLinea = new JPanel();
 		
-		theWindow.add( PanelLinea );
-		PanelLinea.setBorder( BorderFactory.createTitledBorder( "Seleccione:" ) );
-		PanelLinea.add( LabelX1 );
+		Panel.add( PanelLinea );
+		PanelLinea.setBorder( BorderFactory.createTitledBorder( "DDA" ) );
+		//PanelLinea.add( LabelX1 );
+		//PanelLinea.add( DDAX1 );
+		
+		JLabel LabelX1 = new JLabel( "X1" );
+		PanelLinea.add(LabelX1);
 		PanelLinea.add( DDAX1 );
-		*/
+		
+		JLabel LabelY1 = new JLabel( "Y1" );
+		PanelLinea.add(LabelY1);
+		PanelLinea.add( DDAY1 );
+		
+		
+		JLabel LabelX2 = new JLabel( "X2" );
+		PanelLinea.add(LabelX2);
+		PanelLinea.add( DDAX2 );
+		
+		
+		JLabel LabelY2 = new JLabel( "Y2" );
+		PanelLinea.add(LabelY2);
+		PanelLinea.add( DDAY2 );
+		
+		JPanel PanelCirculo = new JPanel();
+		Panel.add( PanelCirculo );
+		PanelCirculo.setBorder( BorderFactory.createTitledBorder( "Bresenham" ) );
 		
 		JLabel LabelXc = new JLabel( "Xc" );
-		Panel.add( LabelXc );
-		Panel.add( Xc );
+		PanelCirculo.add( LabelXc );
+		PanelCirculo.add( Xc );
 		
 		JLabel LabelYc = new JLabel( "Xc" );
-		Panel.add( LabelYc );
-		Panel.add( Yc );
+		PanelCirculo.add( LabelYc );
+		PanelCirculo.add( Yc );
 		
 		JLabel Labelr = new JLabel( "r" );
-		Panel.add( Labelr );
-		Panel.add( r );
+		PanelCirculo.add( Labelr );
+		PanelCirculo.add( r );
+		
+		Panel.add( DDAToolBTN );
 		Panel.add( BresenhamToolBTN );
-
+		
 	}
 	
 	public void Ventana() {
@@ -202,6 +216,37 @@ public class Opciones {
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == DDAToolBTN) {
+				//DDATool(DDAX1.getLayout(), DDAY1.getLayout(), DDAX2.getLayout(), DDAY2.getLayout(), raster);		
+				DDATool(Integer.parseInt(DDAX1.getText()), Integer.parseInt(DDAY1.getText()), Integer.parseInt(DDAX2.getText()), Integer.parseInt(DDAY2.getText()), raster);
+			}
+			
+			if(e.getSource() == BresenhamToolBTN) {
+				
+			}
+		}
+
+		private void DDATool(int DDAX1, int DDAY1, int DDAX2, int DDAY2, WritableRaster raster) {
+			int DX, DY, STEPS, K, V[] = {0, 0, 0};  
+			float X, Y, XI, YI;
+			DX = DDAX2 - DDAX1;
+			DY = DDAY2 - DDAY1;
+			if( Math.abs( DX ) > Math.abs( DY ) ){
+				STEPS = Math.abs( DX );
+			}
+			else {
+				STEPS = Math.abs( DY );
+			}
+			XI = DX / STEPS;
+			YI = DY / STEPS;
+			X = DDAX1;
+			Y = DDAY1;
+			raster.setPixel(Math.round(X), Math.round(Y), V);
+			for(K = 1; K < STEPS; K++) {
+				X = X + XI;
+				Y = Y + YI;
+				raster.setPixel(Math.round(X), Math.round(Y), V);
+			}
 			
 		}
 		

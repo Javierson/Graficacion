@@ -4,7 +4,7 @@ package Pruebas3;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class DDATool extends Tool{
+public class DDATool extends Tool {
 	
 	public DDATool (int x, int y, int width, int height, Color color) {
 		super(x, y, width, height, color);
@@ -26,5 +26,9 @@ public class DDATool extends Tool{
 		  }
 		} 
 	*/
+	
+	public class DDA extends Opciones {
+		
+	}
 	
 }

@@ -1,3 +1,4 @@
+
 package Pruebas3;
 
 import java.awt.Color;
@@ -7,19 +8,26 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JPanel;
 
 public class PaintPanel extends JPanel {
 	
-	private Listener theListener;
+	private Listener Escuchador;
 	private int x, y;
-	private Opciones optionsWindow;
+	private Opciones ClaseOpciones;
 	
 	private Graphics2D g2;
+	// Cambio para la comprobacion del raster
+	//protected BufferedImage image;
 	private BufferedImage image;
+	
+	//private WritableRaster raster;
+	
+	
+
 	
 	// Atributos de las herramientas
 	
@@ -29,16 +37,20 @@ public class PaintPanel extends JPanel {
 	
 	public static final int SCALE = 8;
 	
-	public PaintPanel(Opciones optionsWindow) {
-		this.optionsWindow = new Opciones();
-		theListener = new Listener();
-		this.addMouseListener(theListener);
-		this.addMouseMotionListener(theListener);
+	public PaintPanel(Opciones ClaseOpciones) {
+		this.ClaseOpciones = new Opciones();
+		Escuchador = new Listener();
+		this.addMouseListener(Escuchador);
+		this.addMouseMotionListener(Escuchador);
 		//repaint();
 		image = new BufferedImage( PaintFrame.WIDTH / SCALE,
 				PaintFrame.HEIGHT / SCALE, BufferedImage.TYPE_INT_RGB );
 		g2 = (Graphics2D) image.getGraphics();
 		strokes = new ArrayList<Tool>();
+		//
+		//WritableRaster raster = image.getRaster();
+		//
+		
 		draw();
 		repaint();
 	}
@@ -85,9 +97,9 @@ public class PaintPanel extends JPanel {
 		toolY = e.getY() / SCALE;
 		toolWidth = 4;
 		toolHeight = 4;
-		toolRed = optionsWindow.getRedValue();
-		toolGreen = optionsWindow.getGreenValue();
-		toolBlue = optionsWindow.getBlueValue();
+		toolRed = ClaseOpciones.getRedValue();
+		toolGreen = ClaseOpciones.getGreenValue();
+		toolBlue = ClaseOpciones.getBlueValue();
 		toolColor = new Color(toolRed, toolGreen, toolBlue);
 		strokes.add( new CircleTool( toolX, toolY, toolWidth, toolHeight, toolColor ) );
 		draw(); // Constructor de la imagen
