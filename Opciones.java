@@ -216,18 +216,18 @@ public class Opciones{
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == DDAToolBTN) {
-				//DDATool(DDAX1.getLayout(), DDAY1.getLayout(), DDAX2.getLayout(), DDAY2.getLayout(), raster);		
-				DDATool(Integer.parseInt(DDAX1.getText()), Integer.parseInt(DDAY1.getText()), Integer.parseInt(DDAX2.getText()), Integer.parseInt(DDAY2.getText()), raster);
+			
+			if(e.getSource() == DDAToolBTN) {					
+				PaintPanel.DDATool(Integer.parseInt(DDAX1.getText()), Integer.parseInt(DDAY1.getText()), Integer.parseInt(DDAX2.getText()), Integer.parseInt(DDAY2.getText()), raster);
 			}
 			
 			if(e.getSource() == BresenhamToolBTN) {
 				
 			}
 		}
-
+		/*
 		private void DDATool(int DDAX1, int DDAY1, int DDAX2, int DDAY2, WritableRaster raster) {
-			int DX, DY, STEPS, K, V[] = {0, 0, 0};  
+			int DX, DY, STEPS, K, V[] = {0, 0, 0};
 			float X, Y, XI, YI;
 			DX = DDAX2 - DDAX1;
 			DY = DDAY2 - DDAY1;
@@ -249,7 +249,7 @@ public class Opciones{
 			}
 			
 		}
-		
+		*/
 	}
 
 }

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,7 @@ public class PaintPanel extends JPanel {
 	private BufferedImage image;
 	
 	//private WritableRaster raster;
-	
-	
 
-	
 	// Atributos de las herramientas
 	
 	private Color toolColor;
@@ -47,12 +45,17 @@ public class PaintPanel extends JPanel {
 				PaintFrame.HEIGHT / SCALE, BufferedImage.TYPE_INT_RGB );
 		g2 = (Graphics2D) image.getGraphics();
 		strokes = new ArrayList<Tool>();
-		//
-		//WritableRaster raster = image.getRaster();
+		// Llamar un punto
+		WritableRaster raster = image.getRaster();
+		//image.getRaster(); 
 		//
 		
 		draw();
 		repaint();
+	}
+	
+	public WritableRaster getRaster() {
+		return null ;//Raster.createWritableRaster(image, 0);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -144,4 +147,29 @@ public class PaintPanel extends JPanel {
 		
 	}
 
+	public static void DDATool(int DDAX1, int DDAY1, int DDAX2, int DDAY2, WritableRaster raster) {
+
+		int DX, DY, STEPS, K, V[] = {0, 0, 0};
+		float X, Y, XI, YI;
+		DX = DDAX2 - DDAX1;
+		DY = DDAY2 - DDAY1;
+		if( Math.abs( DX ) > Math.abs( DY ) ){
+			STEPS = Math.abs( DX );
+		}
+		else {
+			STEPS = Math.abs( DY );
+		}
+		XI = DX / STEPS;
+		YI = DY / STEPS;
+		X = DDAX1;
+		Y = DDAY1;
+		raster.setPixel(Math.round(X), Math.round(Y), V);
+		for(K = 1; K < STEPS; K++) {
+			X = X + XI;
+			Y = Y + YI;
+			raster.setPixel(Math.round(X), Math.round(Y), V);
+		
+	}
+
+}
 }
